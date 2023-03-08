@@ -1,9 +1,8 @@
 const calculateExpense = () => {
-  const income = document.querySelector("income").value;
-  const food = document.querySelector("food").value;
-  const rent = document.querySelector("rent").value;
-  const clothes = document.querySelectorAll("clothes").value;
-
+  const income = document.querySelector("#income").value;
+  const food = document.querySelector("#food").value;
+  const rent = document.querySelector("#rent").value;
+  const clothes = document.querySelector("#clothes").value;
   if (
     income < 0 ||
     income == "" ||
@@ -22,9 +21,9 @@ const calculateExpense = () => {
     parseInt(food) + parseInt(rent) + parseInt(clothes);
 
   // calculate balance
-  const balance = parseInt(income.value) - expense;
+  const balance = parseInt(income) - expense;
   //   validate income
-  if (expense > income.value) {
+  if (expense > income) {
     alert("Expenses cannot be more than income");
   } else {
     // view total expense and balance
@@ -36,22 +35,22 @@ const calculateExpense = () => {
 const calculateSavings = () => {
   // calculate saving amount
   const savePercentage = document.getElementById("save").value;
+  const saveInt = parseFloat(savePercentage);
 //   Validate saving percentage value
   if (savePercentage < 0) {
     alert("Provide positive saving value");
+    return;
   }
-  const savingAmount = (savePercentage / 100) + income;
-
+  const savingAmount = (saveInt / 100) * income.value;
   // calculate remaining balance
   const balance = document.getElementById("balance").innerText;
-  const remainingBalance = balance - savingAmount;
-
+  const remainingBalance = parseInt(balance) - savingAmount;
   //   validate saving amount
   if (savingAmount > balance) {
     alert("SavingAmount is greater than balance");
   } else {
     // view saving amount and remaining balance
     document.getElementById("saving-amount").innerText = savingAmount;
-    document.getElementById("remaining-balance").innerText = remainingBalance;
+    document.querySelector(".remaining-balance").innerText = remainingBalance;
   }
 };
